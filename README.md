@@ -1,16 +1,43 @@
-# React + Vite
+# Shaima Sharfuddin — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio built with **React + Vite** (JavaScript, HTML5, CSS3). No backend, no paid services.
 
-Currently, two official plugins are available:
+## Run it
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev       # local development
+npm run build     # production build → dist/
+npm run preview   # serve the production build
+npm run lint
+```
 
-## React Compiler
+## Updating content
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| What | Where |
+| --- | --- |
+| Name, email, GitHub, **LinkedIn URL**, **resume file** | `src/data/siteConfig.js` |
+| Skills, projects, experience, education, services | `src/data/content.js` |
+| SEO title / description | `index.html` |
+| Colours, fonts, spacing | `:root` tokens at the top of `src/index.css` |
 
-## Expanding the ESLint configuration
+- **LinkedIn** — set `linkedinUrl`. While it is empty, LinkedIn links are hidden (no dead links).
+- **Resume** — copy the PDF into `public/` (e.g. `public/Shaima-Sharfuddin-Resume.pdf`) and set
+  `resumeUrl: '/Shaima-Sharfuddin-Resume.pdf'`. While it is empty, "Download Resume" scrolls to Contact.
+- **Project links** — set `repoUrl` / `liveUrl` per project. Empty values show "coming soon" labels.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Structure
+
+```
+src/
+  App.jsx               page layout
+  components/           one component per section + small shared pieces
+  data/                 all editable content
+  hooks/                scroll-aware navigation helpers
+  index.css             design tokens + styles
+```
+
+## Deploying
+
+The `dist/` folder is a static site — it works on GitHub Pages, Netlify or Vercel free tiers.
+For GitHub Pages under a sub-path (e.g. `/portfolio/`), set `base: '/portfolio/'` in `vite.config.js`.
