@@ -15,7 +15,7 @@ export const siteConfig = {
   githubUrl: 'https://github.com/shaima-sharfuddin',
   githubHandle: 'shaima-sharfuddin',
   linkedinUrl: 'https://www.linkedin.com/in/shaima-shaima-6b3659300/',
-  resumeUrl: '',
+  resumeUrl: '/Shaima-Sharfuddin-Resume.pdf',
   resumeFileName: 'Shaima-Sharfuddin-Resume.pdf',
 }
 
