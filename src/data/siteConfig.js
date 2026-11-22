@@ -14,7 +14,7 @@ export const siteConfig = {
   email: 'shaimasharfuddin654@gmail.com',
   githubUrl: 'https://github.com/shaima-sharfuddin',
   githubHandle: 'shaima-sharfuddin',
-  linkedinUrl: '',
+  linkedinUrl: 'https://www.linkedin.com/in/shaima-shaima-6b3659300/',
   resumeUrl: '',
   resumeFileName: 'Shaima-Sharfuddin-Resume.pdf',
 }
