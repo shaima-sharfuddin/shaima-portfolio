@@ -5,6 +5,10 @@
  * Projects: set `repoUrl` / `liveUrl` once a link exists. An empty value shows a
  * quiet "coming soon" label instead of a broken link. Optional: `liveLabel`
  * (default "Live demo") and `apkUrl` (adds an "Android app" link when set).
+ * `repoPrivate: true` hides the GitHub link entirely. `extraLinks` adds more
+ * links ({ href, label, note?, icon? }). Featured projects show a phone mockup
+ * by default; `visual: 'browser'` with `screenshot` / `screenshotAlt` shows a
+ * real screenshot (from /public) in a browser window instead.
  */
 
 export const skillGroups = [
@@ -53,6 +57,37 @@ export const projects = [
     liveLabel: 'Watch demo',
     // EAS "preview" build page (Android APK install link) — paste it once the build finishes.
     apkUrl: 'https://expo.dev/accounts/shaima_17/projects/maz-app/builds/3e49dae6-fc34-46cc-aaa7-fe9da1aec8a3',
+    featured: true,
+  },
+  {
+    title: 'Luxe Beauty Studio',
+    type: 'Website · Full-stack demo project',
+    description:
+      'A premium salon website with online appointment booking and a dedicated owner dashboard to manage daily salon operations.',
+    contributions: [
+      'Responsive salon website with premium design',
+      'Online appointment booking with availability and scheduling rules',
+      'Secure owner authentication and dashboard',
+      'Booking confirmation, rejection and rescheduling',
+      'Service, stylist and business-hours management',
+    ],
+    tech: ['React.js', 'Vite', 'JavaScript', 'CSS3', 'Supabase'],
+    // Repository is private, so no GitHub link (or "coming soon" label) is shown.
+    repoPrivate: true,
+    repoUrl: '',
+    liveUrl: 'https://luxe-beauty-studio-sandy.vercel.app/',
+    liveLabel: 'Visit live site',
+    extraLinks: [
+      {
+        href: 'https://luxe-beauty-studio-sandy.vercel.app/owner/',
+        label: 'Owner dashboard',
+        note: 'login required',
+      },
+    ],
+    visual: 'browser',
+    screenshot: '/projects/luxe-beauty-studio.webp',
+    screenshotAlt:
+      'Screenshot of the Luxe Beauty Studio homepage: a dark hero section with the headline "Beauty That Begins With You" and a Book an Appointment button.',
     featured: true,
   },
   {

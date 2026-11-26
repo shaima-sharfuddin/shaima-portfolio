@@ -1,10 +1,11 @@
+import BrowserMockup from './BrowserMockup.jsx'
 import Icon from './Icon.jsx'
 import PhoneMockup from './PhoneMockup.jsx'
 import Reveal from './Reveal.jsx'
 import { trackPointer } from '../utils/pointerGlow.js'
 
 /** A link when the URL exists, otherwise a quiet "coming soon" label (never a dead link). */
-function ProjectLink({ href, icon, label, pendingLabel, projectTitle, primary }) {
+function ProjectLink({ href, icon, label, note, pendingLabel, projectTitle, primary }) {
   if (!href) {
     return (
       <span className="project__link project__link--pending">
@@ -19,10 +20,11 @@ function ProjectLink({ href, icon, label, pendingLabel, projectTitle, primary })
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${label}: ${projectTitle} (opens in a new tab)`}
+      aria-label={`${label}${note ? ` (${note})` : ''}: ${projectTitle} (opens in a new tab)`}
     >
       <Icon name={icon} size={16} />
       {label}
+      {note && <span className="project__link-note">{note}</span>}
       <Icon name="arrowUpRight" size={14} className="project__link-arrow" />
     </a>
   )
@@ -63,21 +65,34 @@ export default function ProjectCard({ project, index }) {
       </ul>
 
       <div className="project__links">
-        <ProjectLink
-          href={project.repoUrl}
-          icon="github"
-          label="View on GitHub"
-          pendingLabel="Repository coming soon"
-          projectTitle={project.title}
-          primary={project.featured}
-        />
+        {!project.repoPrivate && (
+          <ProjectLink
+            href={project.repoUrl}
+            icon="github"
+            label="View on GitHub"
+            pendingLabel="Repository coming soon"
+            projectTitle={project.title}
+            primary={project.featured}
+          />
+        )}
         <ProjectLink
           href={project.liveUrl}
           icon="arrowUpRight"
           label={project.liveLabel || 'Live demo'}
           pendingLabel={`${project.liveLabel || 'Live demo'} coming soon`}
           projectTitle={project.title}
+          primary={project.featured && project.repoPrivate}
         />
+        {project.extraLinks?.map((link) => (
+          <ProjectLink
+            key={link.href}
+            href={link.href}
+            icon={link.icon || 'arrowUpRight'}
+            label={link.label}
+            note={link.note}
+            projectTitle={project.title}
+          />
+        ))}
         {project.apkUrl && (
           <ProjectLink
             href={project.apkUrl}
@@ -90,10 +105,15 @@ export default function ProjectCard({ project, index }) {
     </>
   )
 
+  const isBrowser = project.visual === 'browser'
+  const classes = ['project', 'glow']
+  if (project.featured) classes.push('project--featured')
+  if (project.featured && isBrowser) classes.push('project--browser')
+
   return (
     <Reveal
       as="article"
-      className={`project glow ${project.featured ? 'project--featured' : ''}`.trim()}
+      className={classes.join(' ')}
       delay={(index % 3) * 90}
       aria-labelledby={`project-${number}`}
       onPointerMove={trackPointer}
@@ -102,7 +122,15 @@ export default function ProjectCard({ project, index }) {
         <div className="project__layout">
           <div className="project__content">{body}</div>
           <div className="project__visual">
-            <PhoneMockup />
+            {isBrowser ? (
+              <BrowserMockup
+                src={project.screenshot}
+                alt={project.screenshotAlt}
+                url={project.liveUrl}
+              />
+            ) : (
+              <PhoneMockup />
+            )}
           </div>
         </div>
       ) : (

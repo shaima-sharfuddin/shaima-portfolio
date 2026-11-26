@@ -2316,6 +2316,99 @@ li {
   background: #1a3966;
 }
 
+/* Browser-window screenshot (featured web project) */
+.project--browser .project__layout {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* Mirror the second featured card so the two navy cards don't look identical. */
+.project--browser .project__visual {
+  order: -1;
+}
+
+.browser {
+  position: relative;
+  width: 100%;
+  transform: perspective(1400px) rotateY(6deg) rotate(-1deg);
+  transition: transform 0.7s var(--ease);
+}
+
+.project--featured:hover .browser {
+  transform: perspective(1400px) rotateY(0deg) rotate(0deg) translateY(-6px);
+}
+
+.browser__glow {
+  position: absolute;
+  inset: 5% -8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74, 116, 179, 0.4), transparent 65%);
+  filter: blur(24px);
+}
+
+.browser__frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, #2a3f63, #0a1428);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+    0 40px 80px -30px rgba(0, 0, 0, 0.7);
+}
+
+.browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+}
+
+.browser__dots {
+  display: flex;
+  flex: none;
+  gap: 6px;
+}
+
+.browser__dots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.browser__address {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.72rem;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.browser__screen {
+  margin: 0 6px 6px;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--navy-950);
+}
+
+.browser__screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.project__link-note {
+  white-space: nowrap;
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
 /* --- Experience ---------------------------------------------------------- */
 .timeline__item {
   transition:
@@ -2593,6 +2686,22 @@ li {
 
   .project__visual {
     display: none;
+  }
+
+  /* A real screenshot is worth keeping on small screens: show it below the text. */
+  .project--browser .project__layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .project--browser .project__visual {
+    display: flex;
+    order: 0;
+  }
+
+  .browser,
+  .project--featured:hover .browser {
+    transform: none;
   }
 
   .project--featured .project__contributions {
